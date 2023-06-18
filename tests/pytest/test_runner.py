@@ -47,6 +47,8 @@ def test_runner(parameters, clean_build):
         vhdl_sources = [os.path.join(tests_dir, "designs", "runner", "runner.vhdl")]
         gpi_interfaces = [vhdl_gpi_interfaces]
 
+    pre_cmd = ['echo everything is fine!;']
+
     sim = os.getenv("SIM", "icarus")
     runner = get_runner(sim)
     compile_args = []
@@ -77,6 +79,7 @@ def test_runner(parameters, clean_build):
     runner.test(
         hdl_toplevel="runner",
         test_module="test_runner",
+        pre_cmd=pre_cmd,
         gpi_interfaces=gpi_interfaces,
         extra_env=parameters,
     )
